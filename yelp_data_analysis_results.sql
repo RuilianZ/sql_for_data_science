@@ -47,10 +47,16 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 
 3. Are there any columns with null values in the Users table? Indicate "yes," or "no."
 
-	Answer:
+	Answer: no
 
 
 	SQL code used to arrive at answer:
+  select id
+, name, review_count, yelping_since, useful, funny, cool, fans, average_stars
+, compliment_hot, compliment_more, compliment_profile, compliment_cute, compliment_list, compliment_note, compliment_plain, compliment_cool, compliment_funny, compliment_writer, compliment_photos
+
+from user
+where id = NULL or name = NULL or review_count = NULL or yelping_since = NULL or useful = NULL or funny = NULL or cool = NULL or fans= NULL or average_stars= NULL or compliment_hot= NULL or compliment_more= NULL or compliment_profile= NULL or compliment_cute= NULL or compliment_list= NULL or compliment_note= NULL or compliment_plain = NULL or compliment_cool= NULL or compliment_funny= NULL or compliment_writer= NULL or compliment_photos= NULL
 
 
 
@@ -59,27 +65,27 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 
 	i. Table: Review, Column: Stars
 
-		min:		max:		avg:
+		min: 1		max: 5		avg: 3.7082
 
 
 	ii. Table: Business, Column: Stars
 
-		min:		max:		avg:
+		min: 1.0		max: 5.0		avg: 3.6549
 
 
 	iii. Table: Tip, Column: Likes
 
-		min:		max:		avg:
+		min: 0		max: 2		avg: 0.0144
 
 
 	iv. Table: Checkin, Column: Count
 
-		min:		max:		avg:
+		min: 1		max: 53		avg: 1.9414
 
 
 	v. Table: User, Column: Review_count
 
-		min:		max:		avg:
+		min: 0		max: 2000		avg: 24.2995
 
 
 
