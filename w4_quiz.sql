@@ -43,3 +43,18 @@ from customers
 group by city
 having customer_number = 2
 order by customer_number desc
+
+/*Create a new customer invoice id by combining a customer’s invoice id with their first and last name while ordering your query in the following order: firstname, lastname, and invoiceID.
+Select all of the correct "AstridGruber" entries that are returned in your results below.*/
+select
+i.invoiceid,
+c.firstname,
+c.lastname,
+c.firstname || c.lastname || i.invoiceid as new_invoiceid
+from customers c
+left join invoices i on i.customerid = c.customerid
+where new_invoiceid like ('AstridGruber%')
+order by
+c.firstname,
+c.lastname,
+i.invoiceid
