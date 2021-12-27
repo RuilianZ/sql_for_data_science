@@ -91,10 +91,44 @@ where id = NULL or name = NULL or review_count = NULL or yelping_since = NULL or
 
 5. List the cities with the most reviews in descending order:
 
-	SQL code used to arrive at answer:
+SQL code used to arrive at answer:
+select
+city,
+review_count
+from business
+order by review_count desc
 
 
 	Copy and Paste the Result Below:
++------------+--------------+
+| city       | review_count |
++------------+--------------+
+| Las Vegas  |         3873 |
+| Montréal   |         1757 |
+| Gilbert    |         1549 |
+| Las Vegas  |         1410 |
+| Las Vegas  |         1389 |
+| Las Vegas  |         1252 |
+| Las Vegas  |         1116 |
+| Las Vegas  |         1084 |
+| Las Vegas  |          961 |
+| Gilbert    |          902 |
+| Las Vegas  |          864 |
+| Scottsdale |          823 |
+| Las Vegas  |          821 |
+| Las Vegas  |          786 |
+| Henderson  |          785 |
+| Toronto    |          778 |
+| Las Vegas  |          768 |
+| Las Vegas  |          758 |
+| Scottsdale |          726 |
+| Cleveland  |          723 |
+| Las Vegas  |          720 |
+| Charlotte  |          715 |
+| Phoenix    |          711 |
+| Las Vegas  |          706 |
+| Phoenix    |          700 |
++------------+--------------+
 
 
 
@@ -103,50 +137,125 @@ where id = NULL or name = NULL or review_count = NULL or yelping_since = NULL or
 i. Avon
 
 SQL code used to arrive at answer:
+select
+stars,
+count(stars) as count
+from business
+where city = 'Avon'
+group by stars
 
 
 Copy and Paste the Resulting Table Below (2 columns – star rating and count):
++-------+-------+
+| stars | count |
++-------+-------+
+|   1.5 |     1 |
+|   2.5 |     2 |
+|   3.5 |     3 |
+|   4.0 |     2 |
+|   4.5 |     1 |
+|   5.0 |     1 |
++-------+-------+
 
 
 ii. Beachwood
 
 SQL code used to arrive at answer:
+select
+stars,
+count(stars) as count
+from business
+where city = 'Beachwood'
+group by stars
 
 
 Copy and Paste the Resulting Table Below (2 columns – star rating and count):
++-------+-------+
+| stars | count |
++-------+-------+
+|   2.0 |     1 |
+|   2.5 |     1 |
+|   3.0 |     2 |
+|   3.5 |     2 |
+|   4.0 |     1 |
+|   4.5 |     2 |
+|   5.0 |     5 |
++-------+-------+
 
 
 
 7. Find the top 3 users based on their total number of reviews:
 
 	SQL code used to arrive at answer:
+select
+stars,
+count(stars) as count
+from business
+where city = 'Beachwood'
+group by stars
 
 
 	Copy and Paste the Result Below:
+	+--------+--------------+
+	| name   | review_count |
+	+--------+--------------+
+	| Gerald |         2000 |
+	| Sara   |         1629 |
+	| Yuri   |         1339 |
+	+--------+--------------+
 
 
 
 8. Does posing more reviews correlate with more fans?
 
 	Please explain your findings and interpretation of the results:
+	Posing more reviews does not correlate with more fans. By sorting review counts for each user and listing their fans number, we cannot see a trend of fans number. This may indicate that the main motivation for the user to write review has little to do with their fans number.
 
 
 
 9. Are there more reviews with the word "love" or with the word "hate" in them?
 
-	Answer:
+	Answer: Yes. There are 1780 reviews with "love" while there are 232 reviews with  "hate".
 
 
 	SQL code used to arrive at answer:
+	select
+	count as love_count
+	from review
+	where text like '%love%'
+
+	select
+	count(text) as hate_count
+	from review
+	where text like '%hate%'
 
 
 
 10. Find the top 10 users with the most fans:
 
 	SQL code used to arrive at answer:
-
+	select
+	name,
+	fans
+	from user
+	order by fans desc
+	limit 10
 
 	Copy and Paste the Result Below:
++-----------+------+
+| name      | fans |
++-----------+------+
+| Amy       |  503 |
+| Mimi      |  497 |
+| Harald    |  311 |
+| Gerald    |  253 |
+| Christine |  173 |
+| Lisa      |  159 |
+| Cat       |  133 |
+| William   |  126 |
+| Fran      |  124 |
+| Lissa     |  120 |
++-----------+------+
 
 
 

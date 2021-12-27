@@ -25,3 +25,51 @@ avg(stars) as average
 from review
 
 5.
+select
+city,
+review_count
+from business
+order by review_count desc
+
+6.
+select
+stars,
+count(stars) as count
+from business
+where city = 'Avon'
+group by stars
+
+7.
+select
+stars,
+count(stars) as count
+from business
+where city = 'Beachwood'
+group by stars
+
+8.
+select
+name,
+review_count,
+fans
+from user
+order by review_count desc
+
+9.
+select
+count as love_count
+from review
+where text like '%love%'
+
+select
+count(text) as hate_count
+from review
+where text like '%hate%'
+
+10.
+select
+name,
+fans
+from user
+order by fans desc
+limit 10
