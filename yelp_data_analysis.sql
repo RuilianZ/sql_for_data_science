@@ -73,3 +73,21 @@ fans
 from user
 order by fans desc
 limit 10
+
+
+Part 2
+
+1.
+select
+b.name,
+b.city,
+c.category,
+b.stars,
+h.hours,
+b.review_count,
+b.address,
+b.postal_code
+from (business b inner join category c on c.business_id = b.id)
+inner join hours h on h.business_id = c.business_id
+where b.city like 'las vegas' and c.category like 'food'
+group by name

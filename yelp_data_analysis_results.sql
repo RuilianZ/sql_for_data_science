@@ -265,28 +265,61 @@ Part 2: Inferences and Analysis
 1. Pick one city and category of your choice and group the businesses in that city or category by their overall star rating. Compare the businesses with 2-3 stars to the businesses with 4-5 stars and answer the following questions. Include your code.
 
 i. Do the two groups you chose to analyze have a different distribution of hours?
-
+Yes. I chose Las Vegas and the food category. The place with 4 stars opens from 10:00-19:00 and the place with 2.5 stars opens from 8:00-22:00.
 
 ii. Do the two groups you chose to analyze have a different number of reviews?
-
+Yes. The one with 4 stars has 30 reviews while the on with 2 stars have 6 reviews.
 
 iii. Are you able to infer anything from the location data provided between these two groups? Explain.
+Not really. These two places have different address and postal code.
 
 SQL code used for analysis:
+select
+b.name,
+b.city,
+c.category,
+b.stars,
+h.hours,
+b.review_count,
+b.address,
+b.postal_code
+from (business b inner join category c on c.business_id = b.id)
+inner join hours h on h.business_id = c.business_id
+where b.city like 'las vegas' and c.category like 'food'
+group by name
 
++-----------------------------+-----------+----------+-------+----------------------+--------------+-----------------------------+-------------+
+| name                        | city      | category | stars | hours                | review_count | address                     | postal_code |
++-----------------------------+-----------+----------+-------+----------------------+--------------+-----------------------------+-------------+
+| Sweet Ruby Jane Confections | Las Vegas | Food     |   4.0 | Saturday|10:00-19:00 |           30 | 8975 S Eastern Ave, Ste 3-B | 89123       |
+| Walgreens                   | Las Vegas | Food     |   2.5 | Saturday|8:00-22:00  |            6 | 3808 E Tropicana Ave        | 89121       |
++-----------------------------+-----------+----------+-------+----------------------+--------------+-----------------------------+-------------+
 
 
 2. Group business based on the ones that are open and the ones that are closed. What differences can you find between the ones that are still open and the ones that are closed? List at least two differences and the SQL code you used to arrive at your answer.
 
 i. Difference 1:
-
+Business that are open has higher average stars and higher review counts than business that re closed.
 
 ii. Difference 2:
-
-
+Business that are open has a higher count of positive reviews (containing useful, funny or cool) than business that are closed.
 
 SQL code used for analysis:
+select
+b.is_open,
+avg(b.stars) as average_stars,
+avg(b.review_count) as average_review,
+count(r.useful) + count(r.funny) + count(r.cool) as positive_reviews
+from business b
+inner join review r on r.id = b.id
+group by b.is_open
 
++---------+---------------+----------------+------------------+
+| is_open | average_stars | average_review | positive_reviews |
++---------+---------------+----------------+------------------+
+|       0 |           2.0 |            4.0 |                3 |
+|       1 | 2.96153846154 |  38.7692307692 |               39 |
++---------+---------------+----------------+------------------+
 
 
 3. For this last part of your analysis, you are going to choose the type of analysis you want to conduct on the Yelp dataset and are going to prepare the data for analysis.
